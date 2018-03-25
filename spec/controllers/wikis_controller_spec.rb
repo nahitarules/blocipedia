@@ -30,8 +30,9 @@
     #end
   #end
   require 'rails_helper'
-
-  RSpec.describe WikiController, type: :controller do
+  include RandomData
+  
+  RSpec.describe WikisController, type: :controller do
 
   let(:my_wiki) { Wiki.create!(title: RandomData.random_sentence, body: RandomData.random_paragraph, private: false) }
 
@@ -43,7 +44,7 @@
 
     it "assigns [my_wiki] to @wikis" do
       get :index
-      expect(assigns(:wiki)).to eq([my_wiki])
+      expect(assigns(:wikis)).to eq([my_wiki])
     end
   end
 end

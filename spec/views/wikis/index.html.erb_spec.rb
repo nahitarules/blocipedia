@@ -1,5 +1,10 @@
-require 'rails_helper'
-
-RSpec.describe "wikis/index.html.erb", type: :view do
-  pending "add some examples to (or delete) #{__FILE__}"
-end
+<h1>All Wikis</h1>
+<% @wikis.each do |wiki| %>
+  <div class="media">
+    <div class="media-body">
+      <h4 class="media-heading">
+        <%= link_to wiki.title, wiki %>
+      </h4>
+    </div>
+  </div>
+<% end %>
