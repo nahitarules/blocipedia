@@ -1,4 +1,6 @@
 class WikisController < ApplicationController
+skip_before_action :authenticate_user!
+
   def index
     @wikis  = Wiki.all
   end
@@ -9,13 +11,13 @@ class WikisController < ApplicationController
 
   def new
     @wiki = Wiki.new
+
   end
 
   def create
-  @wiki = Wiki.new
-  @wiki.title = params[:wiki][:title]
-  @wiki.body = params[:wiki][:body]
-
+    @wiki = Wiki.new
+    @wiki.title = params[:wiki][:title]
+    @wiki.body = params[:wiki][:body]
     if @wiki.save
       flash[:notice] = "Wiki was saved."
       redirect_to @wiki
@@ -28,12 +30,14 @@ class WikisController < ApplicationController
 
   def edit
     @wiki = Wiki.find(params[:id])
+    authorize @wiki
   end
 
   def update
     @wiki = Wiki.find(params[:id])
     @wiki.title = params[:wiki][:title]
     @wiki.body = params[:wiki][:body]
+    authorize @wiki
 
     if @wiki.save
       flash[:notice] = "Wiki was updated."
@@ -46,6 +50,7 @@ class WikisController < ApplicationController
 
   def destroy
     @wiki = Wiki.find(params[:id])
+    authorize @wiki
 
     if @wiki.destroy
       flash[:notice] = "\"#{@wiki.title}\" was deleted successfully."

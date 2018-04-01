@@ -73,6 +73,7 @@ source 'https://rubygems.org'
  gem 'bootstrap-sass'
  gem 'orm_adapter', '~> 0.5.0'
  gem 'devise'
+ gem 'pundit'
 
  group :development, :test do
   gem 'byebug'
