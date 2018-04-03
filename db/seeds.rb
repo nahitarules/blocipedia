@@ -8,27 +8,42 @@
 require 'random_data'
 
 5.times do
-    user= User.new(
-        email: RandomData.random_email,
-        password: "password",
-        
+    user = User.create!(
+        email: Faker::Internet.email,
+        password: Faker::Internet.password,
         )
-    user.save!
-end
+      end
+    users = User.all
 
-users = User.all
 
 10.times do
     Wiki.create!(
-        title: RandomData.random_sentence,
-        body: RandomData.random_paragraph,
-        private: false,
-        user: User.last
+        title: Faker::Lorem.sentence,
+        body: Faker::Lorem.paragraph,
         )
-end
+      end
+      wikis = Wiki.all
 
-wikis = Wiki.all
+      # Create an admin member
+      admin = User.create!(
+        email:    'admin@example.com',
+        password: 'helloworld',
+        role:     'admin'
+        )
+
+      #Create a standard member
+      member = User.create!(
+        email:    'member@example.com',
+        password: 'helloworld'
+        )
+
+      #Create a premium member
+      premium = User.create!(
+          email:    'premium@example.com',
+          password: 'helloworld',
+          role:     'premium'
+        )
 
 puts "Seed finished"
-puts "#{users.count} users created"
-puts "#{wikis.count} wikis created"
+puts "#{User.count} users created"
+puts "#{Wiki.count} wikis created"
