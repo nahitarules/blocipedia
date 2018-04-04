@@ -3,15 +3,17 @@ skip_before_action :authenticate_user!
 
   def index
     @wikis  = Wiki.all
+    #authorize @wiki
   end
 
   def show
     @wiki = Wiki.find(params[:id])
+    authorize @wiki
   end
 
   def new
     @wiki = Wiki.new
-
+    authorize @wiki
   end
 
   def create
@@ -54,7 +56,7 @@ skip_before_action :authenticate_user!
 
     if @wiki.destroy
       flash[:notice] = "\"#{@wiki.title}\" was deleted successfully."
-      redirect_to wikis_path
+      redirect_to action: :index
     else
       flash.now[:alert] = "There was an error deleting the wiki."
       render :show

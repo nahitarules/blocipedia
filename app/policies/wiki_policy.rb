@@ -1,5 +1,12 @@
 class WikiPolicy < ApplicationPolicy
 
+  def index?
+    true
+  end
+
+  def show?
+    true
+  end
 
   def create?
     user.present?
@@ -15,6 +22,10 @@ class WikiPolicy < ApplicationPolicy
 
   def edit?
     update?
+  end
+
+  def destroy?
+  user.present? ||  @record.user == user
   end
 
   private
