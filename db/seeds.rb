@@ -20,6 +20,7 @@ require 'random_data'
     Wiki.create!(
         title: Faker::Lorem.sentence,
         body: Faker::Lorem.paragraph,
+        user: User.all.sample
         )
       end
       wikis = Wiki.all
