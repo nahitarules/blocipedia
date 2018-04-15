@@ -31,10 +31,37 @@
     <%= f.password_field :current_password, autocomplete: "off" %>
   </div>
 
+  <div class="field">
+    <%= f.label "Role Attribute (TESTING ONLY)" %><br />
+    <%= f.radio_button :role, :standard %> Standard
+    <%= f.radio_button :role, :premium %> Premium
+    <%= f.radio_button :role, :admin %> Admin
+  </div>
+
   <div class="actions">
     <%= f.submit "Update" %>
   </div>
 <% end %>
+
+<br />
+<div class="progress">
+  <div class="progress-bar" style="width: 100%;"></div>
+</div>
+
+<div>
+  <b>Current level:</b> <%= current_user.role %> <br />
+  <% if current_user.premium? %>
+    <%= "You currently have  #{current_user.wikis.where(private: true).count.to_s} private wikis" %>
+    <%= button_to 'Downgrade to Standard', downgrade_path, data: { confirm: "Are you sure you want to downgrade to standard?  All private Wikis will become public." }, class: 'btn btn-warning', method: :get  %>
+  <% end %>
+  <% if current_user.standard? %>
+    <p>The upgrade price is $15 USD</p>
+    <%= button_to "Upgrade to premium", new_charge_path, data: { confirm: "Are you sure you want to upgrade to premium?" }, class: 'btn btn-warning', method: :get %>
+  <% end %>
+</div>
+
+<br />
+
 
 <h3>Cancel my account</h3>
 

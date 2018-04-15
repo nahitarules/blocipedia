@@ -1,5 +1,5 @@
 class WikisController < ApplicationController
-skip_before_action :authenticate_user!
+before_action :authenticate_user!
 
   def index
     @wikis  = Wiki.all
