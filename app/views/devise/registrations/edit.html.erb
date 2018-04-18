@@ -52,7 +52,7 @@
   <b>Current level:</b> <%= current_user.role %> <br />
   <% if current_user.premium? %>
     <%= "You currently have  #{current_user.wikis.where(private: true).count.to_s} private wikis" %>
-    <%= button_to 'Downgrade to Standard', downgrade_path, data: { confirm: "Are you sure you want to downgrade to standard?  All private Wikis will become public." }, class: 'btn btn-warning', method: :get  %>
+    <%= button_to 'Downgrade to Standard', downgrade_path(current_user), class:'btn btn-primary', data: { confirm: "Are you sure you want to downgrade to standard?  All private Wikis will become public." }, class: 'btn btn-warning', method: :get  %>
   <% end %>
   <% if current_user.standard? %>
     <p>The upgrade price is $15 USD</p>
