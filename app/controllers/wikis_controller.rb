@@ -21,17 +21,15 @@ before_action :authenticate_user!
   def create
     @user = current_user
 
-    @wiki = Wiki.new(user: current_user)
+    @wiki = Wiki.new(params[:id])
+    @wiki.assign_attributes(wiki_params)
     authorize @wiki
-    @wiki.title = params[:wiki][:title]
-    @wiki.body = params[:wiki][:body]
-    @wiki.private = params[:wiki][:private]
-    
+
     if @wiki.save
-      flash[:notice] = "Wiki was saved."
+      flash[:notice] = "Wiki was created."
       redirect_to @wiki
     else
-      flash.now[:alert] = "There was an error saving the wiki. Please try again."
+      flash.now[:alert] = "There was an error creating the wiki. Please try again."
       render :new
     end
   end
@@ -44,9 +42,8 @@ before_action :authenticate_user!
 
   def update
     @wiki = Wiki.find(params[:id])
-    @wiki.title = params[:wiki][:title]
-    @wiki.body = params[:wiki][:body]
-    @wiki.private = params[:wiki][:private]
+    @wiki.assign_attributes(wiki_params)
+
     authorize @wiki
 
     if @wiki.save
@@ -69,5 +66,11 @@ before_action :authenticate_user!
       flash.now[:alert] = "There was an error deleting the wiki."
       render :show
     end
+  end
+
+  private
+
+  def wiki_params
+    params.require(:wiki).permit(:title, :body, :private)
   end
 end
