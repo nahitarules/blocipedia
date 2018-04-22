@@ -1,5 +1,9 @@
 class ChargesController < ApplicationController
 
+<<<<<<< HEAD
+=======
+
+>>>>>>> stripe
   def create
     @amount = 1500
 
