@@ -1,11 +1,5 @@
 class ChargesController < ApplicationController
 
-  def downgrade
-    current_user.standard! #Downgrade user to standard
-    current_user.wikis.each { |wiki| wiki.update_attribute(:private, false) }
-    flash[:notice] = "Your account was downgraded.  All private Wikis are now public.  Have a nice day!"
-    redirect_to root_path
-  end
 
   def create
     @amount = 1500
