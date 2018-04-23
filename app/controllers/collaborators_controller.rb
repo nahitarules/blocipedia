@@ -1,4 +1,4 @@
-class CollaboratorController < ApplicationController
+class CollaboratorsController < ApplicationController
   def new
     @collaborator = Collaborator.new
   end
