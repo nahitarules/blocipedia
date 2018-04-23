@@ -10,6 +10,7 @@ before_action :authenticate_user!
   def show
     @wiki = Wiki.find(params[:id])
     authorize @wiki
+    @collaborators = @wiki.collaborators
   end
 
   def new
@@ -38,6 +39,7 @@ before_action :authenticate_user!
   def edit
     @wiki = Wiki.find(params[:id])
     authorize @wiki
+    @collaborators = @wiki.collaborators
   end
 
   def update
@@ -52,6 +54,10 @@ before_action :authenticate_user!
     else
       flash.now[:alert] = "There was an error saving the wiki. Please try again."
       render :edit
+    end
+    if params[:wiki][:collaboration]
+      collaborator = User.find_by(email: params[:wiki][:collaboration])
+      @wiki.add_collaborator(collaborator.id)
     end
   end
 

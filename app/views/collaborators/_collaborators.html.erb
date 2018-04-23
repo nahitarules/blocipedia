@@ -1,0 +1,10 @@
+<h3 id="add-collaborators">Add Collaborators</h3>
+
+<% if @wiki.private? && policy(@wiki).destroy?  %>
+
+  <%= form_for [wiki, Collaborator.new] do |f| %>
+     <%= f.text_field :user, class: 'form-control', placeholder: "Email Address" %>
+
+     <%= f.submit "Save", class: 'btn btn-success' %>
+  <% end %>
+<% end %>
