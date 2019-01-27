@@ -1,32 +1,33 @@
-== README
 
-## Bloccit: a Reddit replica to teach the fundamentals of web development and Rails.
+
+## Blocipedia: an application that allows users create public and private wikis.
 
  Made at [Bloc](http://bloc.io).
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+ ## Project Objectives
 
-Things you may want to cover:
+ * Create a basic user scheme for a Ruby on Rails application.
 
-* Ruby version
+ * Give the users of a Ruby on Rails application the ability to sign up for your application using the Devise gem.
 
-* System dependencies
+ * Explain the difference between authentication and authorization.
 
-* Configuration
+ * Integrate Stripe third party API callouts.
 
-* Database creation
+## Built With
 
-* Database initialization
+* Ruby 2.4.1
 
-* How to run the test suite
+* Rails 4.2.8
 
-* Services (job queues, cache servers, search engines, etc.)
+## To run Blocipedia locally
 
-* Deployment instructions
+1. Clone this repository
 
-* ...
+2. Run bundle install
 
+3. Create and migrate the database with rake db:create and rake db:migrate cd
 
-Please feel free to use a different markup language if you do not plan to run
-<tt>rake doc:app</tt>.
+4. Start the server using rails server
+
+5. Run the app on localhost:3000
